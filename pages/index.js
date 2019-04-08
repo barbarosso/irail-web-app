@@ -30,40 +30,76 @@ const Search = () => {
       <div className="hero">
         <h1 className="title">Plan uw route </h1>
         <p className="description">Zoek uw station</p>
-        <AutoComplete
-          label={"From"}
-          items={state.fromStations}
-          onChange={station =>
-            dispatch({
-              type: EVENTS.SET_FROM,
-              from: station.id
-            })
-          }
-          apiCall={async value => {
-            const stations = await getApiStations(value);
-            dispatch({
-              type: EVENTS.SET_FROM_STATIONS,
-              stations
-            });
-          }}
-        />
-        <AutoComplete
-          label={"To"}
-          items={state.toStations}
-          onChange={station =>
-            dispatch({
-              type: EVENTS.SET_TO,
-              to: station.id
-            })
-          }
-          apiCall={async value => {
-            const stations = await getStations(value);
-            dispatch({
-              type: EVENTS.SET_TO_STATIONS,
-              stations
-            });
-          }}
-        />
+        <form>
+          <AutoComplete
+            label={"From"}
+            items={state.fromStations}
+            onChange={station =>
+              dispatch({
+                type: EVENTS.SET_FROM,
+                from: station.id
+              })
+            }
+            apiCall={async value => {
+              const stations = await getApiStations(value);
+              dispatch({
+                type: EVENTS.SET_FROM_STATIONS,
+                stations
+              });
+            }}
+          />
+          <AutoComplete
+            label={"To"}
+            items={state.toStations}
+            onChange={station =>
+              dispatch({
+                type: EVENTS.SET_TO,
+                to: station.id
+              })
+            }
+            apiCall={async value => {
+              const stations = await getStations(value);
+              dispatch({
+                type: EVENTS.SET_TO_STATIONS,
+                stations
+              });
+            }}
+          />
+          <AutoComplete
+            label={"From"}
+            items={state.fromStations}
+            onChange={station =>
+              dispatch({
+                type: EVENTS.SET_FROM,
+                from: station.id
+              })
+            }
+            apiCall={async value => {
+              const stations = await getApiStations(value);
+              dispatch({
+                type: EVENTS.SET_FROM_STATIONS,
+                stations
+              });
+            }}
+          />
+          <AutoComplete
+            label={"To"}
+            items={state.toStations}
+            onChange={station =>
+              dispatch({
+                type: EVENTS.SET_TO,
+                to: station.id
+              })
+            }
+            apiCall={async value => {
+              const stations = await getStations(value);
+              dispatch({
+                type: EVENTS.SET_TO_STATIONS,
+                stations
+              });
+            }}
+          />
+        </form>
       </div>
 
       <button type="submit" disabled={!state.from || !state.to}>
