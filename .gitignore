@@ -11,7 +11,7 @@
 /dist
 /.next
 
-.history
+.history    
 
 # misc
 .DS_Store
