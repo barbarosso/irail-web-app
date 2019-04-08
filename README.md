@@ -4,18 +4,21 @@ Find the most recent version of this guide at [here](https://github.com/segmenti
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Questions? Feedback?](#questions-feedback)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
-  - [npm run dev](#npm-run-dev)
-  - [npm run build](#npm-run-build)
-  - [npm run start](#npm-run-start)
+  - [`npm run dev`](#npm-run-dev)
+  - [`npm run build`](#npm-run-build)
+  - [`npm run start`](#npm-run-start)
 - [Using CSS](#using-css)
 - [Adding Components](#adding-components)
+  - [`./components/simple.js`](#componentssimplejs)
+  - [`./components/complex.js`](#componentscomplexjs)
 - [Fetching Data](#fetching-data)
+  - [`./pages/stars.js`](#pagesstarsjs)
 - [Custom Server](#custom-server)
 - [Syntax Highlighting](#syntax-highlighting)
-- [Using the `static` Folder](#using-the-static-folder)
 - [Deploy to Now](#deploy-to-now)
 - [Something Missing?](#something-missing)
 
