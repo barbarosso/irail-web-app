@@ -1,9 +1,11 @@
 import Downshift from "downshift";
 
-const AutoComplete = ({ items, label }) => (
+const AutoComplete = ({ items, label, onChange, apiCall }) => (
   <Downshift
-    onChange={selection => alert(`You selected ${selection.value}`)}
-    itemToString={item => (item ? item.value : "")}
+    id="auto-complete"
+    onChange={selection => onChange(selection)}
+    itemToString={item => (item ? item.name : "")}
+    defaultHighlightedIndex={0}
   >
     {({
       getInputProps,
@@ -13,11 +15,22 @@ const AutoComplete = ({ items, label }) => (
       isOpen,
       inputValue,
       highlightedIndex,
-      selectedItem
+      selectedItem,
+      reset
     }) => (
       <div>
         <label {...getLabelProps()}>{label}</label>
-        <input {...getInputProps()} />
+        <input
+          {...getInputProps({
+            onChange: e => {
+              const searchValue = e.target.value;
+              reset();
+              if (apiCall && searchValue) {
+                apiCall(searchValue);
+              }
+            }
+          })}
+        />
         <ul {...getMenuProps()}>
           {isOpen
             ? items
