@@ -1,7 +1,7 @@
 export const getStations = async queryParam => {
   try {
     const response = await fetch(
-      `https://irail.be/stations/NMBS?q=${queryParam}`
+      `https://api.irail.be/stations/NMBS?q=${queryParam}`
     );
     const result = await response.json();
     const stations = result["@graph"].map(station => ({
@@ -17,7 +17,7 @@ export const getStations = async queryParam => {
 
 export const getRoutes = async (from, to) => {
   try {
-    const response = await fetch(`https://irail.be/route?to=${from}&to=${to}`);
+    const response = await fetch(`https://api.irail.be/route?to=${from}&to=${to}&date=080419&time=2244&timeSel=depart`);
     const result = await response.json();
 
     return result.connection;
