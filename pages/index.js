@@ -5,7 +5,7 @@ import Nav from "../components/nav";
 import AutoComplete from "../components/auto-complete";
 import "./styles.scss";
 
-const EVENTS = {
+const ACTION = {
   SET_FROM_STATIONS: "SET_FROM_STATIONS",
   SET_TO_STATIONS: "SET_TO_STATIONS",
   SET_FROM: "SET_FROM",
@@ -25,17 +25,17 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case EVENTS.SET_FROM_STATIONS:
+    case ACTION.SET_FROM_STATIONS:
       return { ...state, fromStations: action.stations };
-    case EVENTS.SET_TO_STATIONS:
+    case ACTION.SET_TO_STATIONS:
       return { ...state, toStations: action.stations };
-    case EVENTS.SET_FROM:
+    case ACTION.SET_FROM:
       return { ...state, from: action.from };
-    case EVENTS.SET_TO:
+    case ACTION.SET_TO:
       return { ...state, to: action.to };
-    case EVENTS.SET_LEAVE:
+    case ACTION.SET_LEAVE:
       return { ...state, leave: action.leave };
-    case EVENTS.SET_ROUTES:
+    case ACTION.SET_ROUTES:
       return { ...state, routes: action.routes };
     default:
       throw new Error();
@@ -55,7 +55,7 @@ const Search = () => {
     event.preventDefault();
     const routes = await getRoutes(state.from, state.to);
     dispatch({
-      type: EVENTS.SET_ROUTES,
+      type: ACTION.SET_ROUTES,
       routes
     });
   }
@@ -74,14 +74,14 @@ const Search = () => {
             items={state.fromStations}
             onChange={station =>
               dispatch({
-                type: EVENTS.SET_FROM,
+                type: ACTION.SET_FROM,
                 from: station.id
               })
             }
             apiCall={async value => {
               const stations = await getApiStations(value);
               dispatch({
-                type: EVENTS.SET_FROM_STATIONS,
+                type: ACTION.SET_FROM_STATIONS,
                 stations
               });
             }}
@@ -91,14 +91,14 @@ const Search = () => {
             items={state.toStations}
             onChange={station =>
               dispatch({
-                type: EVENTS.SET_TO,
+                type: ACTION.SET_TO,
                 to: station.id
               })
             }
             apiCall={async value => {
               const stations = await getStations(value);
               dispatch({
-                type: EVENTS.SET_TO_STATIONS,
+                type: ACTION.SET_TO_STATIONS,
                 stations
               });
             }}
