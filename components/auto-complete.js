@@ -1,6 +1,6 @@
 import Downshift from "downshift";
 
-const AutoComplete = ({ items }) => (
+const AutoComplete = ({ items, label }) => (
   <Downshift
     onChange={selection => alert(`You selected ${selection.value}`)}
     itemToString={item => (item ? item.value : "")}
@@ -16,7 +16,7 @@ const AutoComplete = ({ items }) => (
       selectedItem
     }) => (
       <div>
-        <label {...getLabelProps()}>Enter a fruit</label>
+        <label {...getLabelProps()}>{label}</label>
         <input {...getInputProps()} />
         <ul {...getMenuProps()}>
           {isOpen
