@@ -5,7 +5,7 @@ import Nav from "../components/nav";
 import AutoComplete from "../components/auto-complete";
 import "./styles.scss";
 
-const TYPES = {
+const EVENTS = {
   SET_FROM_STATIONS: "SET_FROM_STATIONS",
   SET_TO_STATIONS: "SET_TO_STATIONS",
   SET_FROM: "SET_FROM",
@@ -35,14 +35,14 @@ const Search = () => {
           items={state.fromStations}
           onChange={station =>
             dispatch({
-              type: TYPES.SET_FROM,
+              type: EVENTS.SET_FROM,
               from: station.id
             })
           }
           apiCall={async value => {
             const stations = await getApiStations(value);
             dispatch({
-              type: TYPES.SET_FROM_STATIONS,
+              type: EVENTS.SET_FROM_STATIONS,
               stations
             });
           }}
@@ -52,20 +52,23 @@ const Search = () => {
           items={state.toStations}
           onChange={station =>
             dispatch({
-              type: TYPES.SET_FROM,
+              type: EVENTS.SET_TO,
               to: station.id
             })
           }
           apiCall={async value => {
             const stations = await getStations(value);
             dispatch({
-              type: TYPES.SET_TO_STATIONS,
+              type: EVENTS.SET_TO_STATIONS,
               stations
             });
           }}
         />
       </div>
-      <button>Plan route</button>
+
+      <button type="submit" disabled={!state.from || !state.to}>
+        Plan route
+      </button>
     </div>
   );
 };
@@ -73,23 +76,24 @@ const Search = () => {
 const initialState = {
   toStations: [],
   fromStations: [],
-  from: "",
-  to: "",
+  from: null,
+  to: null,
   leave: true,
   routes: []
 };
 
 function reducer(state, action) {
+  console.log(action);
   switch (action.type) {
-    case TYPES.SET_FROM_STATIONS:
+    case EVENTS.SET_FROM_STATIONS:
       return { ...state, fromStations: action.stations };
-    case TYPES.SET_TO_STATIONS:
+    case EVENTS.SET_TO_STATIONS:
       return { ...state, toStations: action.stations };
-    case TYPES.SET_FROM:
+    case EVENTS.SET_FROM:
       return { ...state, from: action.from };
-    case TYPES.SET_TO:
+    case EVENTS.SET_TO:
       return { ...state, to: action.to };
-    case TYPES.SET_LEAVE:
+    case EVENTS.SET_LEAVE:
       return { ...state, leave: action.leave };
     default:
       throw new Error();
