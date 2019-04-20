@@ -1,10 +1,10 @@
-export const getStations = async queryParam => {
+export const getStations = async (lang = "nl") => {
   try {
     const response = await fetch(
-      `https://irail.be/stations/NMBS?q=${queryParam}`
+      `http://api.irail.be//stations/?format=json&lang=${lang}`
     );
     const result = await response.json();
-    const stations = result["@graph"].map(station => ({
+    const stations = result.station.map(station => ({
       id: station["@id"],
       name: station.name
     }));

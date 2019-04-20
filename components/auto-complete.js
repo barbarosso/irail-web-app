@@ -33,22 +33,29 @@ const AutoComplete = ({ items, label, onChange, apiCall }) => (
         />
         <ul {...getMenuProps()}>
           {isOpen
-            ? items.map((item, index) => (
-                <li
-                  {...getItemProps({
-                    key: item.name,
-                    index,
-                    item,
-                    style: {
-                      backgroundColor:
-                        highlightedIndex === index ? "lightgray" : null,
-                      fontWeight: selectedItem === item ? "bold" : "normal"
-                    }
-                  })}
-                >
-                  {item.name}
-                </li>
-              ))
+            ? items
+                .filter(
+                  item =>
+                    !inputValue ||
+                    item.name.toLowerCase().includes(inputValue.toLowerCase())
+                )
+                .slice(0, 5)
+                .map((item, index) => (
+                  <li
+                    {...getItemProps({
+                      key: item.name,
+                      index,
+                      item,
+                      style: {
+                        backgroundColor:
+                          highlightedIndex === index ? "lightgray" : null,
+                        fontWeight: selectedItem === item ? "bold" : "normal"
+                      }
+                    })}
+                  >
+                    {item.name}
+                  </li>
+                ))
             : null}
         </ul>
       </div>
