@@ -1,7 +1,7 @@
 export const getStations = async queryParam => {
   try {
     const response = await fetch(
-      `https://api.irail.be/stations/NMBS?q=${queryParam}`
+      `https://irail.be/stations/NMBS?q=${queryParam}`
     );
     const result = await response.json();
     const stations = result["@graph"].map(station => ({
@@ -15,9 +15,20 @@ export const getStations = async queryParam => {
   }
 };
 
-export const getRoutes = async (from, to) => {
+export const getRoutes = async (
+  from,
+  to,
+  { date, time, timeSel = "depart", lang = "nl" }
+) => {
   try {
-    const response = await fetch(`https://api.irail.be/route?to=${from}&to=${to}&date=080419&time=2244&timeSel=depart`);
+    const response = await fetch(
+      `http://api.irail.be/connections/?from=${from}&to=${to}&date=${date}&time=${time}&timeSel=${timeSel}&format=json&lang=${lang}&fast=false&typeOfTransport=trains&alerts=false&results=6`,
+      {
+        headers: new Headers({
+          accept: "application/json"
+        })
+      }
+    );
     const result = await response.json();
 
     return result.connection;

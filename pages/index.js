@@ -10,7 +10,7 @@ const ACTION = {
   SET_TO_STATIONS: "SET_TO_STATIONS",
   SET_FROM: "SET_FROM",
   SET_TO: "SET_TO",
-  SET_LEAVE: "SET_LEAVE",
+  SET_DEPARTURE: "SET_DEPARTURE",
   SET_ROUTES: "SET_ROUTES"
 };
 
@@ -19,7 +19,7 @@ const initialState = {
   fromStations: [],
   from: null,
   to: null,
-  leave: true,
+  departure: true,
   routes: []
 };
 
@@ -33,8 +33,8 @@ function reducer(state, action) {
       return { ...state, from: action.from };
     case ACTION.SET_TO:
       return { ...state, to: action.to };
-    case ACTION.SET_LEAVE:
-      return { ...state, leave: action.leave };
+    case ACTION.SET_DEPARTURE:
+      return { ...state, departure: action.departure };
     case ACTION.SET_ROUTES:
       return { ...state, routes: action.routes };
     default:
@@ -51,7 +51,6 @@ const Search = () => {
   }
 
   async function onSubmit(event) {
-    console.log("onsubmit");
     event.preventDefault();
     const routes = await getRoutes(state.from, state.to);
     dispatch({
@@ -75,7 +74,7 @@ const Search = () => {
             onChange={station =>
               dispatch({
                 type: ACTION.SET_FROM,
-                from: station.id
+                from: station.name
               })
             }
             apiCall={async value => {
@@ -92,7 +91,7 @@ const Search = () => {
             onChange={station =>
               dispatch({
                 type: ACTION.SET_TO,
-                to: station.id
+                to: station.name
               })
             }
             apiCall={async value => {
@@ -103,6 +102,42 @@ const Search = () => {
               });
             }}
           />
+          <fieldset id="departure">
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  value="departure"
+                  name="departure"
+                  onChange={event =>
+                    dispatch({
+                      type: ACTION.SET_DEPARTURE,
+                      departure: true
+                    })
+                  }
+                  checked={state.departure === true}
+                />
+                Option 1
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  value="arrive"
+                  name="departure"
+                  onChange={event =>
+                    dispatch({
+                      type: ACTION.SET_DEPARTURE,
+                      departure: false
+                    })
+                  }
+                  checked={state.departure === false}
+                />
+                Option 1
+              </label>
+            </div>
+          </fieldset>
           <button type="submit" disabled={!state.from || !state.to}>
             Plan route
           </button>
