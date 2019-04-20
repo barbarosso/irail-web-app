@@ -18,19 +18,22 @@ export const getAPIDateTimeFromTimeStamp = timeStamp => {
   };
 };
 
-export const duration = (departureTime, arrivalTime)=> {
-  const startDate = new Date(departureTime * 1000)
-  const endDate = new Date(arrivalTime * 1000)
-  const _MS_PER_HOUR = 1000 * 60
+export const convertDateAndTimeToDate = (date, time) => new Date(date + " " + time);
+
+
+const makeDoubleDigit = value => (value < 9 ? "0" + value : value);
+
+export const getDuration = (departureTime, arrivalTime) => {
+  const startDate = new Date(departureTime * 1000);
+  const endDate = new Date(arrivalTime * 1000);
+  const _MS_PER_HOUR = 1000 * 60;
   const difference = endDate - startDate;
   return Math.floor(difference / _MS_PER_HOUR);
-},
+};
 
-export const  minutesToHoursAndMinutes = (totalMinutes)=>{
+export const minutesToHoursAndMinutes = totalMinutes => {
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
 
-  return `${hours}:${minutes}`
-}
-
-const makeDoubleDigit = value => (value < 9 ? "0" + value : value);
+  return `${hours}:${minutes}`;
+};

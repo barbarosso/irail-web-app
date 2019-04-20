@@ -4,6 +4,8 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import AutoComplete from "../components/auto-complete";
 import "./styles.scss";
+import TimePicker from "../components/date-time-picker";
+import DateTimePicker from "../components/date-time-picker";
 
 const ACTION = {
   SET_FROM_STATIONS: "SET_FROM_STATIONS",
@@ -19,6 +21,7 @@ const initialState = {
   fromStations: [],
   from: null,
   to: null,
+  time: null,
   departure: true,
   routes: []
 };
@@ -137,6 +140,10 @@ const Search = () => {
                 Option 1
               </label>
             </div>
+          </fieldset>
+
+          <fieldset>
+            <DateTimePicker onChange={time => console.log(time)} />
           </fieldset>
           <button type="submit" disabled={!state.from || !state.to}>
             Plan route
