@@ -17,6 +17,7 @@ const ACTION = {
 };
 
 const initialState = {
+  lang: "nl",
   stations: [],
   from: null,
   to: null,
@@ -61,7 +62,14 @@ const Search = () => {
 
   async function onSubmit(event) {
     event.preventDefault();
-    const routes = await getRoutes(state.from, state.to);
+    const dateTimeObject = getAPIDateTimeFromTimeStamp(state.date.getTime());
+    const routeOptions = {
+      date: dateTimeObject.date,
+      time: dateTimeObject.time,
+      timeSel: "depart",
+      lang: "nl"
+    };
+    const routes = await getRoutes(state.from, state.to, routeOptions);
     dispatch({
       type: ACTION.SET_ROUTES,
       routes

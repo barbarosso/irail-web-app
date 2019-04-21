@@ -8,14 +8,12 @@ export const getStations = async (lang = "nl") => {
       id: station["@id"],
       name: station.name
     }));
-    console.log(stations)
     return stations;
   } catch (error) {
     console.log("fetching data went wrong");
     throw error;
   }
 };
-
 
 
 export const getRoutes = async (

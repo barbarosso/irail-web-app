@@ -8,18 +8,23 @@
  */
 export const getAPIDateTimeFromTimeStamp = timeStamp => {
   const currentDate = new Date(timeStamp);
-  const time = `${currentDate.getHours()}${currentDate.getMinutes()}`;
-  const date = `${currentDate.getFullYear()}${makeDoubleDigit(
+  const time = `${makeDoubleDigit(currentDate.getHours())}${makeDoubleDigit(
+    currentDate.getMinutes()
+  )}`;
+  const date = `${makeDoubleDigit(currentDate.getDate())}${makeDoubleDigit(
     currentDate.getMonth() + 1
-  )}${makeDoubleDigit(currentDate.getDay())}`;
+  )}${currentDate
+    .getFullYear()
+    .toString()
+    .substr(2, 2)}`;
   return {
     time,
     date
   };
 };
 
-export const convertDateAndTimeToDate = (date, time) => new Date(date + " " + time);
-
+export const convertDateAndTimeToDate = (date, time) =>
+  new Date(date + " " + time);
 
 const makeDoubleDigit = value => (value < 9 ? "0" + value : value);
 
