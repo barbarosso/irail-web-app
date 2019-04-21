@@ -1,0 +1,99 @@
+// Colors:
+///* ========================================================================
+//   #COLORS
+//   ======================================================================== */
+
+// Tint & shade helper functions (http://bourbon.io/docs/#tint-shade)
+
+// Makes a color lighter
+@function tint($color, $percent) {
+  @return mix(#fff, $color, $percent);
+}
+
+// Makes a color darker
+@function shade($color, $percent) {
+  @return mix(#000, $color, $percent);
+}
+
+// Base colors inspired by clrs.cc by @mrmrs_
+// $aqua                       : #7FDBFF;
+// $blue                       : #0074D9;
+// $navy                       : #001F3F;
+// $teal                       : #39CCCC;
+// $green                      : #2ECC40;
+// $olive                      : #3D9970;
+// $lime                       : #01FF70;
+
+// $yellow                     : #ffd521;
+// $orange                     : #FF851B;
+// $red                        : #FF4136;
+// $fuchsia                    : #F012BE;
+// $purple                     : #B10DC9;
+// $maroon                     : #85144B;
+
+// $white                      : #FFFFFF;
+// $silver                     : #DDDDDD;
+// $black                      : #111111;
+// $night-blue: #071649;
+// $package-blue: #008dfa;
+$black: #383838;
+$grey: #aaaaaa;
+
+$transparent: rgba(0, 0, 0, 0);
+
+$dodger-blue: #3c84f0;
+$steel: #7a8198;
+
+$green-blue: #00c28f;
+$red: #ff3333;
+$orange: #ff9800;
+
+// $silver: #d6dadc;
+// $pale-grey: #f4f5f7;
+// $charcoalgrey: #34373e;
+
+// Brand colors
+$color-neutral: $grey !default;
+$color-neutral-xxlight: white;
+$color-neutral-xlight: tint($color-neutral, 95%) !default;
+$color-neutral-light: tint($color-neutral, 70%) !default;
+$color-neutral-dark: shade($color-neutral, 65%) !default;
+$color-neutral-xdark: $black !default;
+
+$color-primary: $dodger-blue !default;
+$color-primary-xlight: tint($color-primary, 90%);
+$color-primary-light: tint($color-primary, 70%);
+$color-primary-dark: shade($color-primary, 45%);
+$color-primary-xdark: shade($color-primary, 65%);
+
+$color-secondary: $steel !default;
+$color-secondary-xlight: tint($color-secondary, 90%);
+$color-secondary-light: tint($color-secondary, 70%);
+$color-secondary-dark: shade($color-secondary, 45%);
+$color-secondary-xdark: shade($color-secondary, 65%);
+
+$color-tertiary: $orange;
+$color-tertiary-xlight: tint($color-tertiary, 90%);
+$color-tertiary-light: tint($color-tertiary, 70%);
+$color-tertiary-dark: shade($color-tertiary, 45%);
+$color-tertiary-xdark: shade($color-tertiary, 65%);
+
+// $color-emphasised      : $yellow;
+
+// UI colors
+$color-success: $green-blue !default;
+// $color-success-25: rgba($color-success, 0.25);
+$color-error: $red !default;
+// $color-error-25: rgba($color-error, 0.25);
+$color-notice: $orange !default;
+// $color-notice-25: rgba($color-notice, 0.25);
+
+// Syntax colors (!default is solarized)
+$color-syntax-background: #111111; // body text / !default code / primary
+$color-syntax-primary: #93a1a1; // body text / !default code / primary
+$color-syntax-secondary: #586e75; // comments / secondary content
+$color-syntax-tertiary: #cb4b16; // constants
+$color-syntax-special: #dc322f; // regex, special keywords
+$color-syntax-keywords: #268bd2; // reserved keywords
+$color-syntax-strings: #2aa198; // strings, numbers
+$color-syntax-operators: #859900; // operators, other keywords

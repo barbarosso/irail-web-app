@@ -1,0 +1,355 @@
+// Inputs
+.c-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: $spacing-medium;
+
+  &.c-input--error {
+    color: $color-error;
+    border-color: $color-error;
+
+    .c-input__field {
+      color: currentColor;
+      border-color: currentColor;
+    }
+  }
+
+  use {
+    fill: currentColor;
+  }
+}
+
+.c-input__wrapper {
+  position: relative;
+}
+
+/* Input parts
+=============== */
+.c-input__field {
+  border: 1px solid $color-neutral;
+  border-radius: $radius-small;
+  font-family: $font-family-regular;
+  color: $color-neutral-dark;
+  min-height: $min-height-form-item;
+
+  width: 100%;
+  padding: ($spacing-small + $spacing-tiny) $spacing-medium;
+  -webkit-appearance: initial;
+  appearance: initial;
+
+  @include inuit-font-size(16px, 1.5);
+
+  &:focus,
+  .c-input--error &:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px rgba($color-primary, 0.7);
+  }
+}
+
+.c-input__label {
+  position: relative;
+  display: block;
+  font-family: $font-family-bold;
+  color: $color-neutral;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: $spacing-small;
+
+  @include inuit-font-size(14px, 1.2);
+}
+
+// .c-input__error-msg {
+//     display: none;
+//     margin-top: $spacing-tiny;
+//     margin-bottom: 0;
+//     color: $color-error;
+//     font-family: $font-family-bold;
+//     transition: all 0.2s ease-in-out;
+
+//     @include inuit-font-size(12px);
+
+//     .c-input--error &,
+//     .c-input--error + & {
+//         display: block;
+//     }
+// }
+
+::-webkit-input-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+::-moz-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+:-ms-input-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+:-moz-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+
+
+
+// Checkboxes/ Radiobuttons
+.c-input--radiobutton-group,
+.c-input--checkbox-group {
+  padding: $spacing-small;
+  border: 1px solid $color-neutral-light;
+
+  legend {
+    padding: 0 $spacing-small;
+  }
+}
+
+.c-input--radiobutton-group-error,
+.c-input--checkbox-group-error {
+  border: 1px solid $color-error;
+}
+
+/* Type: Checkbox & Radiobutton
+   =============== */
+.c-input--checkbox,
+.c-input--radiobutton {
+  display: inline-flex;
+  position: relative;
+  width: 100%;
+  margin-bottom: $spacing-medium;
+
+  &.c-input--disabled {
+    .c-input__label {
+      color: currentColor;
+      font-family: $font-family-regular;
+      font-weight: normal;
+    }
+  }
+
+  &.c-input--error {
+    color: $color-error;
+    border-color: $color-error;
+
+    .c-input__label {
+      color: currentColor;
+    }
+
+    .c-input__field-radiobutton,
+    .c-input__field-checkbox {
+      color: currentColor;
+      border-color: currentColor;
+    }
+  }
+
+  &.c-input--readonly {
+    .c-input__label {
+      cursor: default;
+      font-family: $font-family-regular;
+    }
+  }
+
+  .c-input__label {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.5;
+    user-select: none;
+  }
+}
+
+.c-input__field-radiobutton,
+.c-input__field-checkbox {
+  appearance: none;
+  color: $color-tertiary;
+
+  @include visually-hidden;
+
+  &:focus + .c-input__label:after,
+  &:focus + .c-input__label:before {
+    outline: none;
+    border-radius: $radius-small;
+    box-shadow: 0 0 2px 2px rgba($color-primary, 0.7);
+  }
+
+  & + .c-input__label:after,
+  & + .c-input__label:before {
+    align-self: flex-start;
+    width: $icon-medium;
+    height: $icon-medium;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  & + .c-input__label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+
+    flex: 0 0 $icon-medium;
+    margin-right: $spacing-small;
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: $radius-small;
+      background-color: $color-neutral-light;
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.c-input__field-checkbox {
+  & + .c-input__label:before {
+    // replace the svg with the apropriate checkbox svg code, and keep the fill color (or stroke)
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+        $color-neutral +
+        '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+    );
+
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+          $color-error +
+          '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+      );
+    }
+  }
+
+  &:checked + .c-input__label:before {
+    // If checked, the red border must dissappear. The svg stays on before:
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+          $color-neutral +
+          '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+      );
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-primary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+          $color-neutral-light + '" rx="2"/><path fill="' + $color-neutral +
+          '" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+      );
+      border-width: 1px;
+      border-radius: 3px;
+      border-style: solid;
+    }
+  }
+}
+
+.c-input__field-radiobutton {
+  &:focus + .c-input__label:after,
+  &:focus + .c-input__label:before {
+    border-radius: 50%;
+  }
+
+  & + .c-input__label:before {
+    // replace the svg with the apropriate checkbox svg code, and keep the fill color (or stroke)
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><path fill="' +
+        $color-neutral +
+        '" d="M8,16.5 C3.30557963,16.5 -0.5,12.6944204 -0.5,8 C-0.5,3.30557963 3.30557963,-0.5 8,-0.5 C12.6944204,-0.5 16.5,3.30557963 16.5,8 C16.5,12.6944204 12.6944204,16.5 8,16.5 Z M8,15.5 C12.1421356,15.5 15.5,12.1421356 15.5,8 C15.5,3.85786438 12.1421356,0.5 8,0.5 C3.85786438,0.5 0.5,3.85786438 0.5,8 C0.5,12.1421356 3.85786438,15.5 8,15.5 Z" transform="translate(1 1)"/></svg>'
+    );
+
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><path fill="' +
+          $color-error +
+          '" d="M8,16.5 C3.30557963,16.5 -0.5,12.6944204 -0.5,8 C-0.5,3.30557963 3.30557963,-0.5 8,-0.5 C12.6944204,-0.5 16.5,3.30557963 16.5,8 C16.5,12.6944204 12.6944204,16.5 8,16.5 Z M8,15.5 C12.1421356,15.5 15.5,12.1421356 15.5,8 C15.5,3.85786438 12.1421356,0.5 8,0.5 C3.85786438,0.5 0.5,3.85786438 0.5,8 C0.5,12.1421356 3.85786438,15.5 8,15.5 Z" transform="translate(1 1)"/></svg>'
+      );
+    }
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: 50%;
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-primary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: 50%;
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+          shade($color-neutral-light, 20%) + '"/><path fill="' +
+          shade($color-neutral-light, 20%) +
+          '" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+      );
+    }
+  }
+}
+
+.c-input--checkbox-secondary {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-secondary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--checkbox-tertiary {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-tertiary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--checkbox-inverted {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-neutral-xlight + '" rx="2"/><path fill="' + $color-primary +
+        '" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--radiobutton-secondary {
+  .c-input__field-radiobutton:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-secondary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--radiobutton-tertiary {
+  .c-input__field-radiobutton:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-tertiary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+  }
+}

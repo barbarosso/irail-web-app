@@ -67,9 +67,9 @@ const Search = () => {
       <Head title="Home" />
       <Nav />
 
-      <div className="hero">
-        <h1 className="title">Plan uw route </h1>
-        <p className="description">Zoek uw station</p>
+      <div className="o-layout hero">
+        <h1 className="title o-layout__item">Plan uw route </h1>
+        <p className="description o-layout__item">Zoek uw station</p>
       </div>
       <div>
         
