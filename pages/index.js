@@ -63,14 +63,21 @@ const Search = () => {
   }
 
   return (
-    <div>
+    <div className="o-wrapper">
       <Head title="Home" />
       <Nav />
 
       <div className="hero">
         <h1 className="title">Plan uw route </h1>
         <p className="description">Zoek uw station</p>
+      </div>
+      <div>
+        
         <form onSubmit={onSubmit}>
+          <div className="o-layout">
+          <div className="o-layout__item u-1-of-2-at-small">
+
+          
           <AutoComplete
             label={"From"}
             items={state.fromStations}
@@ -88,6 +95,10 @@ const Search = () => {
               });
             }}
           />
+          </div>
+          <div className="o-layout__item u-1-of-2-at-small">
+
+          
           <AutoComplete
             label={"To"}
             items={state.toStations}
@@ -105,30 +116,40 @@ const Search = () => {
               });
             }}
           />
-          <fieldset id="departure">
-            <div className="radio">
-              <label>
-                <input
-                  type="radio"
-                  value="departure"
-                  name="departure"
-                  onChange={event =>
-                    dispatch({
-                      type: ACTION.SET_DEPARTURE,
-                      departure: true
-                    })
-                  }
-                  checked={state.departure === true}
-                />
-                Option 1
-              </label>
             </div>
-            <div className="radio">
-              <label>
+            </div>
+          <fieldset id="arrive-departure" className="o-layout">
+            
+              <div className="c-input--radiobutton o-layout__item u-1-of-3-at-small u-1-of-4-at-medium">
+                
+                  <input
+                    id="departure"
+                    className="c-input__field-radiobutton"
+                    type="radio"
+                    value="departure"
+                    name="arrive-departure"
+                    onChange={event =>
+                      dispatch({
+                        type: ACTION.SET_DEPARTURE,
+                        departure: true
+                      })
+                    }
+                    checked={state.departure === true}
+                  />
+                <label htmlFor="departure" className="c-input__label">
+                  Departure on:
+                </label>
+              </div>
+            
+
+              <div className="c-input--radiobutton o-layout__item u-1-of-3-at-small u-1-of-4-at-medium">
+                
                 <input
+                  id="arrive"
+                  className="c-input__field-radiobutton"
                   type="radio"
                   value="arrive"
-                  name="departure"
+                  name="arrive-departure"
                   onChange={event =>
                     dispatch({
                       type: ACTION.SET_DEPARTURE,
@@ -137,15 +158,18 @@ const Search = () => {
                   }
                   checked={state.departure === false}
                 />
-                Option 1
-              </label>
-            </div>
+                <label htmlFor="arrive" className="c-input__label">
+                  Arrive on:
+                </label>
+              </div>
           </fieldset>
 
-          <fieldset>
+          <fieldset className="o-layout">
+            <div className="o-layout__item">
             <DateTimePicker onChange={time => console.log(time)} />
+            </div>
           </fieldset>
-          <button type="submit" disabled={!state.from || !state.to}>
+          <button className={`c-button c-button--primary ${(!state.from || !state.to) && 'c-button--disabled'}`} type="submit" disabled={!state.from || !state.to}>
             Plan route
           </button>
         </form>

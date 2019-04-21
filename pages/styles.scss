@@ -1,44 +1,826 @@
+/* ==========================================================================
+   INUITCSS
+   ========================================================================== */
+
+/**
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+
+/**
+ * This is an example inuitcss manifest file. DO NOT MODIFY THIS FILE DIRECTLY.
+ * Instead, copy and paste it into your own CSS directory and make additions,
+ * extensions, and modifications there.
+ */
+
+/**
+ * CONTENTS
+ *
+ * SETTINGS
+ * Config...............Project-level configuration and feature switches.
+ * Core.................inuitcss’ core and setup settings.
+ * Global...............Project-wide variables and settings.
+ *
+ * TOOLS
+ * Font-size............A mixin which guarantees baseline-friendly line-heights.
+ * Clearfix.............Micro clearfix mixin.
+ * Hidden...............Mixin for hiding elements.
+ * Sass MQ..............inuitcss’ default media query manager.
+ *
+ * GENERIC
+ * Box-sizing...........Better default `box-sizing`.
+ * Normalize.css........A level playing field using @necolas’ Normalize.css.
+ * Reset................A tiny reset to complement Normalize.css.
+ * Shared...............Sensibly and tersely share some global commonalities
+ *                      (particularly useful when managing vertical rhythm).
+ *
+ * ELEMENTS
+ * Page.................Set up our document’s default `font-size` and
+ *                      `line-height`.
+ * Headings.............Very minimal (i.e. only font-size information) for
+ *                      headings 1 through 6.
+ * Images...............Base image styles.
+ * Tables...............Simple table styles.
+ *
+ * OBJECTS
+ * Wrapper..............Page constraint object.
+ * Layout...............Generic layout module.
+ * Media................Image- and text-like content side by side. The
+ *                      poster-child of OOCSS.
+ * Flag.................Table-layout-based advancement on the Media object.
+ * List-bare............Lists with no bullets or indents.
+ * List-inline..........A list whose items all site in a line.
+ * Box..................Simple boxing abstraction.
+ * Block................Image-on-top-of-text object.
+ * Ratio................A container for maintaining aspect ratio of content.
+ * Crop.................Provide a cropping context for media (images, etc.).
+ * Table................Classes for manipulating `table`s.
+ * Pack.................Pack items into available horizontal space.
+ *
+ * COMPONENTS
+ * Buttons..............An example button component, and how it fits into the
+ *                      inuitcss framework.
+ *
+ * UTILITIES
+ * Clearfix.............Bind our clearfix onto a utility class.
+ * Widths...............Simple width helper classes.
+ * Headings.............Reassigning our heading styles to helper classes.
+ * Spacings.............Nudge bits of the DOM around with these spacing
+ *                      classes.
+ * Responsive-Spacings..Enhances the function of normal spacings for
+ *                      responsive usage.
+ * Print................Reset-like styles taken from the HTML5 Boilerplate.
+ * Hide.................Helper classes to hide content
+ */
+
+// SETTINGS
+@import "node_modules/inuitcss/settings/_example.settings.config.scss";
+@import "node_modules/inuitcss/settings/_settings.core.scss";
+@import "node_modules/inuitcss/settings/_example.settings.global.scss";
+
+// Settings:
+// Font Family:
+$font-family-regular: Arial, Helvetica, sans-serif !default;
+$font-family-bold: Arial, Helvetica, sans-serif !default;
+$font-family-italic: Arial, Helvetica, sans-serif !default;
+$font-family-light: Arial, Helvetica, sans-serif !default;
+// Standardise some UI treatments.
+$radius-small: 3px !default;
+$radius-medium: $inuit-global-spacing-unit !default;
+$radius-rounded: 50% !default;
+// Uniform height on Buttons, Inputs and other Form Items:
+$min-height-form-item-small: 34px !default;
+$min-height-form-item: 52px !default;
+// Icon Sizes:
+$icon-small: 16px !default;
+$icon-medium: 24px !default;
+$icon-large: 32px !default;
+
+// Breakpoints (https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.necmuodfd)
+$mq-breakpoints: (
+  tiny: 400px,
+  small:  600px,
+  medium:  900px,
+  large: 1200px,
+  huge: 1800px
+) !default;
+
+$inuit-widths-delimiter: '-of-'; // use: u-1-of-2, u-push-2-of-5
+$inuit-widths-breakpoint-separator: '-at-'; // use: u-1-of-1-at-small, u-1-of-1-at-large
+
+// TOOLS
+@import "node_modules/inuitcss/tools/tools.font-size";
+@import "node_modules/inuitcss/tools/tools.clearfix";
+@import "node_modules/inuitcss/tools/tools.hidden";
+@import "node_modules/sass-mq/mq";
+
+// GENERIC
+@import "node_modules/inuitcss/generic/generic.box-sizing";
+@import "node_modules/inuitcss/generic/generic.normalize";
+@import "node_modules/inuitcss/generic/generic.reset";
+// ELEMENTS
+@import "node_modules/inuitcss/elements/elements.page";
+@import "node_modules/inuitcss/elements/elements.headings";
+@import "node_modules/inuitcss/elements/elements.images";
+// OBJECTS
+// Uncomment and add to this section as necessary.
+@import "node_modules/inuitcss/objects/objects.wrapper";
+@import "node_modules/inuitcss/objects/objects.layout";
+// @import "node_modules/inuitcss/objects/objects.media";
+// @import "node_modules/inuitcss/objects/objects.flag";
+// @import "node_modules/inuitcss/objects/objects.list-bare";
+// @import "node_modules/inuitcss/objects/objects.list-inline";
+// @import "node_modules/inuitcss/objects/objects.box";
+// @import "node_modules/inuitcss/objects/objects.block";
+// @import "node_modules/inuitcss/objects/objects.ratio";
+// @import "node_modules/inuitcss/objects/objects.crop";
+// @import "node_modules/inuitcss/objects/objects.table";
+// COMPONENTS
+// Build and include your project’s UI components here.
+
+// UTILITIES
+// @import "node_modules/inuitcss/utilities/utilities.clearfix";
+// Be aware that enabling offsets produces a large chunk of classes which might
+// bloat your CSS, depending of the amount of breakpoints you defined.
+// Only set this to `true` if you are absolutely sure about what you are doing.
+
+$inuit-offsets: true;
+@import "node_modules/inuitcss/utilities/utilities.widths";
+@import "node_modules/inuitcss/utilities/utilities.spacings";
+@import "node_modules/inuitcss/utilities/utilities.responsive-spacings";
+
+.u-auto-width {
+  width: auto !important;
+}
+
+// @import "node_modules/inuitcss/utilities/utilities.headings";
+// @import "node_modules/inuitcss/utilities/utilities.print";
+
+
+// Colors:
+///* ========================================================================
+//   #COLORS
+//   ======================================================================== */
+
+// Tint & shade helper functions (http://bourbon.io/docs/#tint-shade)
+
+// Makes a color lighter
+@function tint($color, $percent) {
+  @return mix(#fff, $color, $percent);
+}
+
+// Makes a color darker
+@function shade($color, $percent) {
+  @return mix(#000, $color, $percent);
+}
+
+// Base colors inspired by clrs.cc by @mrmrs_
+// $aqua                       : #7FDBFF;
+// $blue                       : #0074D9;
+// $navy                       : #001F3F;
+// $teal                       : #39CCCC;
+// $green                      : #2ECC40;
+// $olive                      : #3D9970;
+// $lime                       : #01FF70;
+
+// $yellow                     : #ffd521;
+// $orange                     : #FF851B;
+// $red                        : #FF4136;
+// $fuchsia                    : #F012BE;
+// $purple                     : #B10DC9;
+// $maroon                     : #85144B;
+
+// $white                      : #FFFFFF;
+// $silver                     : #DDDDDD;
+// $black                      : #111111;
+// $night-blue: #071649;
+// $package-blue: #008dfa;
+$black: #383838;
+$grey: #aaaaaa;
+
+$transparent: rgba(0, 0, 0, 0);
+
+$dodger-blue: #3c84f0;
+$steel: #7a8198;
+
+$green-blue: #00c28f;
+$red: #ff3333;
+$orange: #ff9800;
+
+// $silver: #d6dadc;
+// $pale-grey: #f4f5f7;
+// $charcoalgrey: #34373e;
+
+// Brand colors
+$color-neutral: $grey !default;
+$color-neutral-xxlight: white;
+$color-neutral-xlight: tint($color-neutral, 95%) !default;
+$color-neutral-light: tint($color-neutral, 70%) !default;
+$color-neutral-dark: shade($color-neutral, 65%) !default;
+$color-neutral-xdark: $black !default;
+
+$color-primary: $dodger-blue !default;
+$color-primary-xlight: tint($color-primary, 90%);
+$color-primary-light: tint($color-primary, 70%);
+$color-primary-dark: shade($color-primary, 45%);
+$color-primary-xdark: shade($color-primary, 65%);
+
+$color-secondary: $steel !default;
+$color-secondary-xlight: tint($color-secondary, 90%);
+$color-secondary-light: tint($color-secondary, 70%);
+$color-secondary-dark: shade($color-secondary, 45%);
+$color-secondary-xdark: shade($color-secondary, 65%);
+
+$color-tertiary: $orange;
+$color-tertiary-xlight: tint($color-tertiary, 90%);
+$color-tertiary-light: tint($color-tertiary, 70%);
+$color-tertiary-dark: shade($color-tertiary, 45%);
+$color-tertiary-xdark: shade($color-tertiary, 65%);
+
+// $color-emphasised      : $yellow;
+
+// UI colors
+$color-success: $green-blue !default;
+// $color-success-25: rgba($color-success, 0.25);
+$color-error: $red !default;
+// $color-error-25: rgba($color-error, 0.25);
+$color-notice: $orange !default;
+// $color-notice-25: rgba($color-notice, 0.25);
+
+// Syntax colors (!default is solarized)
+$color-syntax-background: #111111; // body text / !default code / primary
+$color-syntax-primary: #93a1a1; // body text / !default code / primary
+$color-syntax-secondary: #586e75; // comments / secondary content
+$color-syntax-tertiary: #cb4b16; // constants
+$color-syntax-special: #dc322f; // regex, special keywords
+$color-syntax-keywords: #268bd2; // reserved keywords
+$color-syntax-strings: #2aa198; // strings, numbers
+$color-syntax-operators: #859900; // operators, other keywords
+
+// Tools / Svg Inline
+// Utility to change the color on svg icons added as background:
+/* Use it like this:
+    background-image: inline-svg('
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+      <g fill="none" fill-rule="evenodd">
+        <circle cx="8" cy="8" r="8" fill="' + $color-primary + '"/>
+        <path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/>
+        <path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/>
+      </g>
+    </svg>');
+*/
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D"
+  );
+  $new: $string;
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+  @return $new;
+}
+
+@function inline-svg($string) {
+  @return url('data:image/svg+xml;utf8,#{url-encode($string)}');
+}
+
+
+// Aliases:
+// Reassign `$inuit-global-spacing-unit` to `$unit`.
+$spacing-tiny: $inuit-global-spacing-unit-tiny;        // 4
+$spacing-small: $inuit-global-spacing-unit-small;      // 8
+$spacing-medium: $inuit-global-spacing-unit;           // 16
+$spacing-large: $inuit-global-spacing-unit-large;      // 32
+$spacing-huge: $inuit-global-spacing-unit-huge;        // 64
+
+// Reassign lengthy font-size mixin to `font-size()`.
+@mixin font-size($args...) {
+  @include inuit-font-size($args...);
+}
+
+@mixin visually-hidden($args...) {
+  @include inuit-hidden-visually($args...);
+};
+
+
+
+
 .hero {
-  width: 100%;
+  // width: 100%;
   color: #333;
+  padding: $spacing-large $spacing-medium;
 }
 .title {
-  margin: 0;
-  width: 100%;
-  padding-top: 80px;
-  line-height: 1.15;
-  font-size: 48px;
+  // margin: 0;
+  // width: 100%;
+  // padding-top: 80px;
+  // line-height: 1.15;
+  // font-size: 48px;
 }
 .title,
 .description {
   text-align: center;
 }
-.row {
-  max-width: 880px;
-  margin: 80px auto 40px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+// .row {
+//   max-width: 880px;
+//   margin: 80px auto 40px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+// }
+// .card {
+//   padding: 18px 18px 24px;
+//   width: 220px;
+//   text-align: left;
+//   text-decoration: none;
+//   color: #434343;
+//   border: 1px solid #9b9b9b;
+// }
+// .card:hover {
+//   border-color: #067df7;
+// }
+// .card h3 {
+//   margin: 0;
+//   color: #067df7;
+//   font-size: 18px;
+// }
+// .card p {
+//   margin: 0;
+//   padding: 12px 0 0;
+//   font-size: 13px;
+//   color: #333;
+// }
+
+
+// Inputs
+.c-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: $spacing-medium;
+
+  &.c-input--error {
+    color: $color-error;
+    border-color: $color-error;
+
+    .c-input__field {
+      color: currentColor;
+      border-color: currentColor;
+    }
+  }
+
+  use {
+    fill: currentColor;
+  }
 }
-.card {
-  padding: 18px 18px 24px;
-  width: 220px;
-  text-align: left;
-  text-decoration: none;
-  color: #434343;
-  border: 1px solid #9b9b9b;
+
+.c-input__wrapper {
+  position: relative;
 }
-.card:hover {
-  border-color: #067df7;
+
+/* Input parts
+=============== */
+.c-input__field {
+  border: 1px solid $color-neutral;
+  border-radius: $radius-small;
+  font-family: $font-family-regular;
+  color: $color-neutral-dark;
+  min-height: $min-height-form-item;
+
+  width: 100%;
+  padding: ($spacing-small + $spacing-tiny) $spacing-medium;
+  -webkit-appearance: initial;
+  appearance: initial;
+
+  @include inuit-font-size(16px, 1.5);
+
+  &:focus,
+  .c-input--error &:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px rgba($color-primary, 0.7);
+  }
 }
-.card h3 {
-  margin: 0;
-  color: #067df7;
-  font-size: 18px;
+
+.c-input__label {
+  position: relative;
+  display: block;
+  font-family: $font-family-bold;
+  color: $color-neutral;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: $spacing-small;
+
+  @include inuit-font-size(14px, 1.2);
 }
-.card p {
-  margin: 0;
-  padding: 12px 0 0;
-  font-size: 13px;
-  color: #333;
+
+// .c-input__error-msg {
+//     display: none;
+//     margin-top: $spacing-tiny;
+//     margin-bottom: 0;
+//     color: $color-error;
+//     font-family: $font-family-bold;
+//     transition: all 0.2s ease-in-out;
+
+//     @include inuit-font-size(12px);
+
+//     .c-input--error &,
+//     .c-input--error + & {
+//         display: block;
+//     }
+// }
+
+::-webkit-input-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
 }
+::-moz-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+:-ms-input-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+:-moz-placeholder {
+  color: $color-neutral;
+  font-family: $font-family-italic;
+}
+
+
+
+// Checkboxes/ Radiobuttons
+.c-input--radiobutton-group,
+.c-input--checkbox-group {
+  padding: $spacing-small;
+  border: 1px solid $color-neutral-light;
+
+  legend {
+    padding: 0 $spacing-small;
+  }
+}
+
+.c-input--radiobutton-group-error,
+.c-input--checkbox-group-error {
+  border: 1px solid $color-error;
+}
+
+/* Type: Checkbox & Radiobutton
+   =============== */
+.c-input--checkbox,
+.c-input--radiobutton {
+  display: inline-flex;
+  position: relative;
+  width: 100%;
+  margin-bottom: $spacing-medium;
+
+  &.c-input--disabled {
+    .c-input__label {
+      color: currentColor;
+      font-family: $font-family-regular;
+      font-weight: normal;
+    }
+  }
+
+  &.c-input--error {
+    color: $color-error;
+    border-color: $color-error;
+
+    .c-input__label {
+      color: currentColor;
+    }
+
+    .c-input__field-radiobutton,
+    .c-input__field-checkbox {
+      color: currentColor;
+      border-color: currentColor;
+    }
+  }
+
+  &.c-input--readonly {
+    .c-input__label {
+      cursor: default;
+      font-family: $font-family-regular;
+    }
+  }
+
+  .c-input__label {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.5;
+    user-select: none;
+  }
+}
+
+.c-input__field-radiobutton,
+.c-input__field-checkbox {
+  appearance: none;
+  color: $color-tertiary;
+
+  @include visually-hidden;
+
+  &:focus + .c-input__label:after,
+  &:focus + .c-input__label:before {
+    outline: none;
+    border-radius: $radius-small;
+    box-shadow: 0 0 2px 2px rgba($color-primary, 0.7);
+  }
+
+  & + .c-input__label:after,
+  & + .c-input__label:before {
+    align-self: flex-start;
+    width: $icon-medium;
+    height: $icon-medium;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  & + .c-input__label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+
+    flex: 0 0 $icon-medium;
+    margin-right: $spacing-small;
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: $radius-small;
+      background-color: $color-neutral-light;
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+.c-input__field-checkbox {
+  & + .c-input__label:before {
+    // replace the svg with the apropriate checkbox svg code, and keep the fill color (or stroke)
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+        $color-neutral +
+        '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+    );
+
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+          $color-error +
+          '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+      );
+    }
+  }
+
+  &:checked + .c-input__label:before {
+    // If checked, the red border must dissappear. The svg stays on before:
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="' +
+          $color-neutral +
+          '" d="M2.5,1 C1.67157288,1 1,1.67157288 1,2.5 L1,13.5 C1,14.3284271 1.67157288,15 2.5,15 L13.5,15 C14.3284271,15 15,14.3284271 15,13.5 L15,2.5 C15,1.67157288 14.3284271,1 13.5,1 L2.5,1 Z M2.5,0 L13.5,0 C14.8807119,-2.77555756e-16 16,1.11928813 16,2.5 L16,13.5 C16,14.8807119 14.8807119,16 13.5,16 L2.5,16 C1.11928813,16 1.38777878e-16,14.8807119 0,13.5 L0,2.5 C-1.38777878e-16,1.11928813 1.11928813,2.77555756e-16 2.5,0 Z"/></svg>'
+      );
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-primary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+          $color-neutral-light + '" rx="2"/><path fill="' + $color-neutral +
+          '" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+      );
+      border-width: 1px;
+      border-radius: 3px;
+      border-style: solid;
+    }
+  }
+}
+
+.c-input__field-radiobutton {
+  &:focus + .c-input__label:after,
+  &:focus + .c-input__label:before {
+    border-radius: 50%;
+  }
+
+  & + .c-input__label:before {
+    // replace the svg with the apropriate checkbox svg code, and keep the fill color (or stroke)
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><path fill="' +
+        $color-neutral +
+        '" d="M8,16.5 C3.30557963,16.5 -0.5,12.6944204 -0.5,8 C-0.5,3.30557963 3.30557963,-0.5 8,-0.5 C12.6944204,-0.5 16.5,3.30557963 16.5,8 C16.5,12.6944204 12.6944204,16.5 8,16.5 Z M8,15.5 C12.1421356,15.5 15.5,12.1421356 15.5,8 C15.5,3.85786438 12.1421356,0.5 8,0.5 C3.85786438,0.5 0.5,3.85786438 0.5,8 C0.5,12.1421356 3.85786438,15.5 8,15.5 Z" transform="translate(1 1)"/></svg>'
+    );
+
+    .c-input--error & {
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><path fill="' +
+          $color-error +
+          '" d="M8,16.5 C3.30557963,16.5 -0.5,12.6944204 -0.5,8 C-0.5,3.30557963 3.30557963,-0.5 8,-0.5 C12.6944204,-0.5 16.5,3.30557963 16.5,8 C16.5,12.6944204 12.6944204,16.5 8,16.5 Z M8,15.5 C12.1421356,15.5 15.5,12.1421356 15.5,8 C15.5,3.85786438 12.1421356,0.5 8,0.5 C3.85786438,0.5 0.5,3.85786438 0.5,8 C0.5,12.1421356 3.85786438,15.5 8,15.5 Z" transform="translate(1 1)"/></svg>'
+      );
+    }
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: 50%;
+    }
+  }
+
+  &:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-primary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+
+    .c-input--readonly &,
+    .c-input--disabled & {
+      border-radius: 50%;
+      background-image: inline-svg(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+          shade($color-neutral-light, 20%) + '"/><path fill="' +
+          shade($color-neutral-light, 20%) +
+          '" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+      );
+    }
+  }
+}
+
+.c-input--checkbox-secondary {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-secondary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--checkbox-tertiary {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-tertiary +
+        '" rx="2"/><path fill="#FFF" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--checkbox-inverted {
+  .c-input__field-checkbox:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><rect width="15" height="15" x=".5" y=".5" fill="' +
+        $color-neutral-xlight + '" rx="2"/><path fill="' + $color-primary +
+        '" fill-rule="nonzero" d="M7.00389658,10.2362506 L11.8737117,4.6707477 C12.0555527,4.46292938 12.371434,4.44187063 12.5792523,4.62371165 C12.7870706,4.80555268 12.8081294,5.12143399 12.6262883,5.3292523 L7.37628835,11.3292523 C7.17573068,11.5584611 6.81858018,11.5566389 6.6203717,11.3253957 L3.6203717,7.82539569 C3.44066062,7.61573277 3.46494139,7.30008277 3.67460431,7.1203717 C3.88426723,6.94066062 4.19991723,6.96494139 4.3796283,7.17460431 L7.00389658,10.2362506 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--radiobutton-secondary {
+  .c-input__field-radiobutton:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-secondary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+  }
+}
+
+.c-input--radiobutton-tertiary {
+  .c-input__field-radiobutton:checked + .c-input__label:after {
+    background-image: inline-svg(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g fill="none" fill-rule="evenodd"><circle cx="8" cy="8" r="8" fill="' +
+        $color-tertiary +
+        '"/><path fill="#979797" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/><path fill="#FFF" fill-rule="nonzero" d="M8,14.5 C4.41014913,14.5 1.5,11.5898509 1.5,8 C1.5,4.41014913 4.41014913,1.5 8,1.5 C11.5898509,1.5 14.5,4.41014913 14.5,8 C14.5,11.5898509 11.5898509,14.5 8,14.5 Z M8,13.5 C11.0375661,13.5 13.5,11.0375661 13.5,8 C13.5,4.96243388 11.0375661,2.5 8,2.5 C4.96243388,2.5 2.5,4.96243388 2.5,8 C2.5,11.0375661 4.96243388,13.5 8,13.5 Z"/></g></svg>'
+    );
+  }
+}
+
+
+// Buttons
+/* ==========================================================================
+   #BUTTONS
+   ========================================================================== */
+
+/**
+ * This is an example component. Extend inuitcss by building your own components
+ * that make up your UI. Component classes are prefixed with a `c-`.
+ */
+
+/**
+ * 1. Allow us to style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Make buttons inherit font styles (often necessary when styling `input`s as
+ *    buttons).
+ * 4. Reset/normalize some styles.
+ * 5. Force all button-styled elements to appear clickable.
+ */
+
+.c-button {
+  display: inline-flex; /* [1] */
+
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  vertical-align: middle; /* [2] */
+  font: inherit; /* [3] */
+  text-align: center; /* [4] */
+  margin: 0; /* [4] */
+  cursor: pointer; /* [5] */
+  background-color: $transparent;
+  padding: $spacing-medium $spacing-large;
+  transition: $global-transition;
+  border-radius: $radius-small;
+  border: 1px solid transparent;
+  user-select: none;
+  text-transform: uppercase;
+
+  font-family: $font-family-bold;
+  @include inuit-font-size(14px, 1.2);
+  min-height: $min-height-form-item;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px rgba($color-primary, .7);
+  }
+
+  .c-icon {
+    position: absolute;
+  }
+}
+
+
+
+/* Color variants
+   ========================================================================== */
+
+.c-button--primary {
+  color: $color-neutral-xlight;
+  background-color: $color-primary;
+  border-color: $color-primary;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none; /* [4] */
+  }
+
+  &:hover:not(.c-button--disabled),
+  &:focus:not(.c-button--disabled){
+    background-color: $color-primary-xdark;
+  }
+
+  &[disabled],
+  &[disabled]:hover {
+    cursor: not-allowed !important;
+    opacity: .7;
+  }
+
+}
+
+
