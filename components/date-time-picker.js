@@ -1,7 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
+import PropTypes from "prop-types";
 
-const DateTimePicker = ({ timeStamp, onChange }) => {
-  const currentTime = new Date(timeStamp || Date.now());
+const DateTimePicker = ({ date: currentDate, onChange }) => {
+  const currentTime = new Date(
+    (currentDate && currentDate.getTime()) || Date.now()
+  );
   const [date, setDate] = useState(currentTime.toISOString().substr(0, 10));
   const [time, setTime] = useState(currentTime.toTimeString().substr(0, 5));
 
@@ -31,3 +34,7 @@ const DateTimePicker = ({ timeStamp, onChange }) => {
 };
 
 export default DateTimePicker;
+
+DateTimePicker.PropTypes = {
+  date: PropTypes.instanceOf(Date)
+};

@@ -4,12 +4,14 @@ import Head from "../components/head";
 import Nav from "../components/nav";
 import AutoComplete from "../components/auto-complete";
 import "./styles.scss";
+import { getAPIDateTimeFromTimeStamp } from "../utils/date-utils";
 import DateTimePicker from "../components/date-time-picker";
 
 const ACTION = {
   SET_STATIONS: "SET_STATIONS",
   SET_FROM: "SET_FROM",
   SET_TO: "SET_TO",
+  SET_DATE: "SET_DATE",
   SET_DEPARTURE: "SET_DEPARTURE",
   SET_ROUTES: "SET_ROUTES"
 };
@@ -18,7 +20,7 @@ const initialState = {
   stations: [],
   from: null,
   to: null,
-  time: null,
+  date: new Date(),
   departure: true,
   routes: []
 };
@@ -31,12 +33,14 @@ function reducer(state, action) {
       return { ...state, from: action.from };
     case ACTION.SET_TO:
       return { ...state, to: action.to };
+    case ACTION.SET_DATE:
+      return { ...state, to: action.date };
     case ACTION.SET_DEPARTURE:
       return { ...state, departure: action.departure };
     case ACTION.SET_ROUTES:
       return { ...state, routes: action.routes };
     default:
-      throw new Error();
+      throw new Error("no valid action given to the reducer", action.type);
   }
 }
 
@@ -131,7 +135,14 @@ const Search = () => {
           </fieldset>
 
           <fieldset>
-            <DateTimePicker onChange={time => console.log(time)} />
+            <DateTimePicker
+              onChange={date => {
+                dispatch({
+                  type: ACTION.SET_DATE,
+                  date
+                });
+              }}
+            />
           </fieldset>
           <button type="submit" disabled={!state.from || !state.to}>
             Plan route
