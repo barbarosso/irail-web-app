@@ -8,6 +8,7 @@
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "downshift": "^3.2.7",
+    "inuitcss": "^6.0.0",
     "next": "^8.0.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

@@ -18,23 +18,29 @@ const DateTimePicker = ({ date: currentDate, onChange }) => {
   }, [date, time]);
 
   return (
-    <Fragment>
-      <input
-        type="date"
-        value={date}
-        onChange={event => setDate(event.target.value)}
-      />
-      <input
-        type="time"
-        value={time}
-        onChange={event => setTime(event.target.value)}
-      />
-    </Fragment>
+    <div className="o-layout">
+      <div className={'c-input o-layout__item u-3-of-5-at-small u-2-of-5-at-medium'}>
+        <input
+          className={'c-input__field'}
+          type="date"
+          value={date}
+          onChange={event => setDate(event.target.value)}
+        />
+      </div>
+      <div className={'c-input o-layout__item u-2-of-5-at-small u-1-of-5-at-medium'}>
+        <input
+          className={'c-input__field'}
+          type="time"
+          value={time}
+          onChange={event => setTime(event.target.value)}
+        />
+      </div>
+    </div>
   );
 };
 
 export default DateTimePicker;
 
-DateTimePicker.PropTypes = {
+DateTimePicker.propTypes = {
   date: PropTypes.instanceOf(Date)
 };

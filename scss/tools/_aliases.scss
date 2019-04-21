@@ -1,0 +1,19 @@
+
+// Aliases:
+// Reassign `$inuit-global-spacing-unit` to `$unit`.
+$spacing-tiny: $inuit-global-spacing-unit-tiny;        // 4
+$spacing-small: $inuit-global-spacing-unit-small;      // 8
+$spacing-medium: $inuit-global-spacing-unit;           // 16
+$spacing-large: $inuit-global-spacing-unit-large;      // 32
+$spacing-huge: $inuit-global-spacing-unit-huge;        // 64
+
+// Reassign lengthy font-size mixin to `font-size()`.
+@mixin font-size($args...) {
+  @include inuit-font-size($args...);
+}
+
+@mixin visually-hidden($args...) {
+  @include inuit-hidden-visually($args...);
+};
+
+

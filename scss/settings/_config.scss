@@ -1,0 +1,34 @@
+
+
+// Settings:
+// Font Family:
+$font-family-regular: Arial, Helvetica, sans-serif !default;
+$font-family-bold: Arial, Helvetica, sans-serif !default;
+$font-family-italic: Arial, Helvetica, sans-serif !default;
+$font-family-light: Arial, Helvetica, sans-serif !default;
+// Standardise some UI treatments.
+$radius-small: 3px !default;
+$radius-medium: $inuit-global-spacing-unit !default;
+$radius-rounded: 50% !default;
+// Uniform height on Buttons, Inputs and other Form Items:
+$min-height-form-item-small: 34px !default;
+$min-height-form-item: 52px !default;
+// Icon Sizes:
+$icon-small: 16px !default;
+$icon-medium: 24px !default;
+$icon-large: 32px !default;
+
+// Breakpoints (https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.necmuodfd)
+$mq-breakpoints: (
+  tiny: 400px,
+  small:  600px,
+  medium:  900px,
+  large: 1200px,
+  huge: 1800px
+) !default;
+
+$inuit-widths-delimiter: '-of-'; // use: u-1-of-2, u-push-2-of-5
+$inuit-widths-breakpoint-separator: '-at-'; // use: u-1-of-1-at-small, u-1-of-1-at-large
+
+// In order to avoid changing on font sizing inside layouts
+$inuit-use-markup-fix: true;

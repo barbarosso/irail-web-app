@@ -18,9 +18,15 @@ const AutoComplete = ({ items, label, onChange, apiCall }) => (
       selectedItem,
       reset
     }) => (
-      <div>
-        <label {...getLabelProps()}>{label}</label>
+      <div className={"c-input"}>
+        <label
+          {...getLabelProps({ htmlFor: label })}
+          className={"c-input__label"}
+        >
+          {label}
+        </label>
         <input
+          className={"c-input__field"}
           {...getInputProps({
             onChange: e => {
               const searchValue = e.target.value;
@@ -28,7 +34,9 @@ const AutoComplete = ({ items, label, onChange, apiCall }) => (
               if (apiCall && searchValue) {
                 apiCall(searchValue);
               }
-            }
+            },
+            id: label,
+            name: label
           })}
         />
         <ul {...getMenuProps()}>
