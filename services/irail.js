@@ -15,8 +15,7 @@ export const getStations = async (lang = "nl") => {
   }
 };
 
-
-export const getRoutes = async (
+export const getConnections = async (
   from,
   to,
   { date, time, timeSel = "depart", lang = "nl" }

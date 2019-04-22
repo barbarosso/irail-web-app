@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from "react";
-import { getStations, getRoutes } from "../services/irail";
+import { getStations, getConnections } from "../services/irail";
 import Head from "../components/head";
 import Nav from "../components/nav";
 import AutoComplete from "../components/auto-complete";
@@ -13,7 +13,7 @@ const ACTION = {
   SET_TO: "SET_TO",
   SET_DATE: "SET_DATE",
   SET_DEPARTURE: "SET_DEPARTURE",
-  SET_ROUTES: "SET_ROUTES"
+  SET_CONNECTIONS: "SET_CONNECTIONS"
 };
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
   to: null,
   date: new Date(),
   departure: true,
-  routes: []
+  connections: []
 };
 
 function reducer(state, action) {
@@ -38,8 +38,8 @@ function reducer(state, action) {
       return { ...state, to: action.date };
     case ACTION.SET_DEPARTURE:
       return { ...state, departure: action.departure };
-    case ACTION.SET_ROUTES:
-      return { ...state, routes: action.routes };
+    case ACTION.SET_CONNECTIONS:
+      return { ...state, connections: action.connections };
     default:
       throw new Error("no valid action given to the reducer", action.type);
   }
@@ -69,10 +69,14 @@ const Search = () => {
       timeSel: "depart",
       lang: "nl"
     };
-    const routes = await getRoutes(state.from, state.to, routeOptions);
+    const connections = await getConnections(
+      state.from,
+      state.to,
+      routeOptions
+    );
     dispatch({
-      type: ACTION.SET_ROUTES,
-      routes
+      type: ACTION.SET_CONNECTIONS,
+      routes: connections
     });
   }
 
