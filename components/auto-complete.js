@@ -1,74 +1,66 @@
-import Downshift from "downshift";
+import { useCombobox } from "downshift";
+import { useEffect, useState } from "react";
 
-const AutoComplete = ({ items, label, onChange, apiCall }) => (
-  <Downshift
-    id="auto-complete"
-    onChange={selection => onChange(selection)}
-    itemToString={item => (item ? item.name : "")}
-    defaultHighlightedIndex={0}
-  >
-    {({
-      getInputProps,
-      getItemProps,
-      getLabelProps,
-      getMenuProps,
-      isOpen,
-      inputValue,
-      highlightedIndex,
-      selectedItem,
-      reset
-    }) => (
-      <div className={"c-input"}>
-        <label
-          {...getLabelProps({ htmlFor: label })}
-          className={"c-input__label"}
-        >
-          {label}
-        </label>
-        <input
-          className={"c-input__field"}
-          {...getInputProps({
-            onChange: e => {
-              const searchValue = e.target.value;
-              reset();
-              if (apiCall && searchValue) {
-                apiCall(searchValue);
-              }
-            },
-            id: label,
-            name: label
-          })}
-        />
-        <ul {...getMenuProps()}>
-          {isOpen
-            ? items
-                .filter(
-                  item =>
-                    !inputValue ||
-                    item.name.toLowerCase().includes(inputValue.toLowerCase())
-                )
-                .slice(0, 5)
-                .map((item, index) => (
-                  <li
-                    {...getItemProps({
-                      key: item.name,
-                      index,
-                      item,
-                      style: {
-                        backgroundColor:
-                          highlightedIndex === index ? "lightgray" : null,
-                        fontWeight: selectedItem === item ? "bold" : "normal"
-                      }
-                    })}
-                  >
-                    {item.name}
-                  </li>
-                ))
-            : null}
-        </ul>
-      </div>
-    )}
-  </Downshift>
-);
+const AutoComplete = ({ items, onChange, label }) => {
+  const [inputItems, setInputItems] = useState(items);
+  const {
+    isOpen,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
+    items: inputItems,
+    itemToString: (item) => item.name,
+    onChange,
+    defaultHighlightedIndex: 0,
+    onInputValueChange: ({ inputValue }) => {
+      setInputItems(
+        items.filter((item) =>
+          item.name.toLowerCase().startsWith(inputValue.toLowerCase())
+        )
+      );
+    },
+  });
+  return (
+    <div className={"c-input"} {...getComboboxProps()}>
+      <label
+        {...getLabelProps({ htmlFor: label })}
+        className={"c-input__label"}
+      >
+        {label}
+      </label>
+      <input
+        className={"c-input__field"}
+        {...getInputProps({
+          id: label,
+          name: label,
+        })}
+      />
+      <ul {...getMenuProps()}>
+        {isOpen
+          ? inputItems.map((item, index) => (
+              <li
+                {...getItemProps({
+                  key: item.name,
+                  index,
+                  item,
+                  style: {
+                    backgroundColor:
+                      highlightedIndex === index ? "lightgray" : null,
+                    fontWeight: highlightedIndex === index ? "bold" : "normal",
+                  },
+                })}
+              >
+                {item.name}
+              </li>
+            ))
+          : null}
+      </ul>
+    </div>
+  );
+};
 
 export default AutoComplete;

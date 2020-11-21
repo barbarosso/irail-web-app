@@ -13,7 +13,7 @@ const ACTION = {
   SET_TO: "SET_TO",
   SET_DATE: "SET_DATE",
   SET_DEPARTURE: "SET_DEPARTURE",
-  SET_CONNECTIONS: "SET_CONNECTIONS"
+  SET_CONNECTIONS: "SET_CONNECTIONS",
 };
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
   to: null,
   date: new Date(),
   departure: true,
-  connections: []
+  connections: [],
 };
 
 function reducer(state, action) {
@@ -39,26 +39,28 @@ function reducer(state, action) {
     case ACTION.SET_DEPARTURE:
       return { ...state, departure: action.departure };
     case ACTION.SET_CONNECTIONS:
+      console.log("connections", action.connections);
       return { ...state, connections: action.connections };
     default:
       throw new Error("no valid action given to the reducer", action.type);
   }
 }
 
-const Search = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export async function getStaticProps(context) {
+  const stations = await getStations();
 
-  const loadStations = async () => {
-    let stations = await getStations();
-    dispatch({
-      type: ACTION.SET_STATIONS,
-      stations
-    });
+  return {
+    props: {
+      stations: stations,
+    }, // will be passed to the page component as props
   };
+}
 
-  useEffect(() => {
-    loadStations();
-  }, []);
+const Search = ({ stations }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
+  });
+
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -67,8 +69,9 @@ const Search = () => {
       date: dateTimeObject.date,
       time: dateTimeObject.time,
       timeSel: "depart",
-      lang: "nl"
+      lang: "nl",
     };
+
     const connections = await getConnections(
       state.from,
       state.to,
@@ -76,7 +79,7 @@ const Search = () => {
     );
     dispatch({
       type: ACTION.SET_CONNECTIONS,
-      routes: connections
+      connections,
     });
   }
 
@@ -95,23 +98,23 @@ const Search = () => {
             <div className="o-layout__item u-1-of-2-at-small">
               <AutoComplete
                 label={"From"}
-                items={state.stations}
-                onChange={station =>
+                items={stations}
+                onChange={(station) =>
                   dispatch({
                     type: ACTION.SET_FROM,
-                    from: station.name
+                    from: station.name,
                   })
-                }
+                } 
               />
             </div>
             <div className="o-layout__item u-1-of-2-at-small">
-              <AutoComplete
+               <AutoComplete
                 label={"To"}
-                items={state.stations}
-                onChange={station =>
+                items={stations}
+                onChange={(station) =>
                   dispatch({
                     type: ACTION.SET_TO,
-                    to: station.name
+                    to: station.name,
                   })
                 }
               />
@@ -125,10 +128,10 @@ const Search = () => {
                 type="radio"
                 value="departure"
                 name="arrive-departure"
-                onChange={event =>
+                onChange={(event) =>
                   dispatch({
                     type: ACTION.SET_DEPARTURE,
-                    departure: true
+                    departure: true,
                   })
                 }
                 checked={state.departure === true}
@@ -145,10 +148,10 @@ const Search = () => {
                 type="radio"
                 value="arrive"
                 name="arrive-departure"
-                onChange={event =>
+                onChange={(event) =>
                   dispatch({
                     type: ACTION.SET_DEPARTURE,
-                    departure: false
+                    departure: false,
                   })
                 }
                 checked={state.departure === false}
@@ -162,19 +165,19 @@ const Search = () => {
           <fieldset className="o-layout">
             <div className="o-layout__item">
               <DateTimePicker
-                onChange={date => {
+                onChange={(date) => {
                   dispatch({
                     type: ACTION.SET_DATE,
-                    date
+                    date,
                   });
                 }}
               />
             </div>
           </fieldset>
           <button
-            className={`c-button c-button--primary ${(!state.from ||
-              !state.to) &&
-              "c-button--disabled"}`}
+            className={`c-button c-button--primary ${
+              (!state.from || !state.to) && "c-button--disabled"
+            }`}
             type="submit"
             disabled={!state.from || !state.to}
           >
@@ -182,6 +185,7 @@ const Search = () => {
           </button>
         </form>
       </div>
+      <div>{JSON.stringify(state.connections)}</div>
     </div>
   );
 };

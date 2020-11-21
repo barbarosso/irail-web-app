@@ -1,7 +1,7 @@
 export const getStations = async (lang = "nl") => {
   try {
     const response = await fetch(
-      `https://api.irail.be//stations/?format=json&lang=${lang}`
+      `https://api.irail.be/stations/?format=json&lang=${lang}`
     );
     const result = await response.json();
     const stations = result.station.map(station => ({
@@ -22,7 +22,7 @@ export const getConnections = async (
 ) => {
   try {
     const response = await fetch(
-      `https://api.irail.be/connections/?from=${from}&to=${to}&date=${date}&time=${time}&timeSel=${timeSel}&format=json&lang=${lang}&fast=false&typeOfTransport=trains&alerts=false&results=6`,
+      `https://api.irail.be/connections/?from=${from}&to=${to}&date=${date}&time=${time}&timesel=departure&format=json&lang=en&typeOfTransport=automatic&alerts=false&results=6`,
       {
         headers: new Headers({
           accept: "application/json"
